@@ -14,26 +14,32 @@ public class MyApplication {
 
     private void mainMenu() {
         System.out.println();
-        System.out.println("Welcome to My Application");
+        System.out.println("Welcome to shop management system");
         System.out.println("Select option:");
-        System.out.println("1. Get all users");
-        System.out.println("2. Get user by id");
-        System.out.println("3. Create user");
+        System.out.println("1. Get all employees");
+        System.out.println("2. Get employee by id");
+        System.out.println("3. Create employee");
+        System.out.println("4. Delete employee");
+//        System.out.println("5. Get all transactions");
+//        System.out.println("6. Get transaction by id");
+//        System.out.println("7. Create transaction");
+//        System.out.println("8. Delete transaction");
         System.out.println("0. Exit");
         System.out.println();
-        System.out.print("Enter option (1-3): ");
+        System.out.print("Enter option (1-4): ");
     }
 
     public void start() {
         while (true) {
             mainMenu();
             try {
+                // All employees are referred as users
                 int option = scanner.nextInt();
-
                 switch (option) {
                     case 1: getAllUsersMenu(); break;
                     case 2: getUserByIdMenu(); break;
                     case 3: createUserMenu(); break;
+                    case 4: deleteUserMenu(); break;
                     default: return;
                 }
             } catch (InputMismatchException e) {
@@ -42,7 +48,6 @@ public class MyApplication {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-
             System.out.println("*************************");
         }
     }
@@ -54,7 +59,6 @@ public class MyApplication {
 
     public void getUserByIdMenu() {
         System.out.println("Please enter id");
-
         int id = scanner.nextInt();
 
         String response = controller.getUser(id);
@@ -69,7 +73,34 @@ public class MyApplication {
         System.out.println("Please enter gender (male/female)");
         String gender = scanner.next();
 
-        String response = controller.createUser(name, surname, gender);
-        System.out.println(response);
+        boolean response = controller.createUser(name, surname, gender);
+        System.out.println(response ? "User was created!" : "User creation was failed!");
+    }
+
+    public void deleteUserMenu() {
+        while(true) {
+            System.out.println("Please enter id");
+            int id = scanner.nextInt();
+
+            String response = controller.getUser(id);
+            System.out.println("Is the following user correct? (y/n): " + response);
+            String answer = scanner.next();
+
+            if (answer.equals("y")) {
+                if (controller.deleteUser(id)) {
+                    System.out.println("User successfully deleted!");
+                    break;
+                } else {
+                    System.out.println("Deleting user failed!");
+                }
+            }
+
+            System.out.println("Try again? (y/n): ");
+            answer = scanner.next();
+
+            if (!answer.equals("y")) {
+                break;
+            }
+        }
     }
 }

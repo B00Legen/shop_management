@@ -13,13 +13,11 @@ public class UserController implements IUserController {
         this.repo = repo;
     }
 
-    public String createUser(String name, String surname, String gender) {
+    public boolean createUser(String name, String surname, String gender) {
         boolean male = gender.equalsIgnoreCase("male");
         User user = new User(name, surname, male);
 
-        boolean created = repo.createUser(user);
-
-        return (created ? "User was created!" : "User creation was failed!");
+        return repo.createUser(user);
     }
 
     public String getUser(int id) {
@@ -37,5 +35,9 @@ public class UserController implements IUserController {
         }
 
         return response.toString();
+    }
+
+    public boolean deleteUser(int id) {
+        return repo.deleteUser(id);
     }
 }
