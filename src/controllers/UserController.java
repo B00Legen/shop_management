@@ -1,6 +1,7 @@
 package controllers;
 
 import models.User;
+import models.Cheque;
 import controllers.interfaces.IUserController;
 import repositories.interfaces.IUserRepository;
 
@@ -39,5 +40,32 @@ public class UserController implements IUserController {
 
     public boolean deleteUser(int id) {
         return repo.deleteUser(id);
+    }
+
+    public boolean createCheque(String date, int uid, int price) {
+        Cheque cheque = new Cheque(date, uid, price);
+
+        return repo.createCheque(cheque);
+    }
+
+    public String getCheque(int id) {
+        Cheque cheque = repo.getCheque(id);
+
+        return (cheque == null ? "Transaction was not found!" : cheque.toString());
+    }
+
+    public String getAllCheques() {
+        List<Cheque> cheques = repo.getAllCheques();
+
+        StringBuilder response = new StringBuilder();
+        for (Cheque cheque : cheques) {
+            response.append(cheque.toString()).append("\n");
+        }
+
+        return response.toString();
+    }
+
+    public boolean deleteCheque(int id) {
+        return repo.deleteCheque(id);
     }
 }
