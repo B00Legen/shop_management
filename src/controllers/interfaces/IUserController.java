@@ -10,4 +10,6 @@ public interface IUserController {
     String getCheque(int id);
     String getAllCheques();
     boolean deleteCheque(int id);
+
+    String getLastCheque(int id);
 }

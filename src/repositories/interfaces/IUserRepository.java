@@ -2,6 +2,7 @@ package repositories.interfaces;
 
 import models.User;
 import models.Cheque;
+import models.ChequeFull;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface IUserRepository {
     Cheque getCheque(int id);
     List<Cheque> getAllCheques();
     boolean deleteCheque(int id);
+
+    ChequeFull getLastCheque(int id);
 }

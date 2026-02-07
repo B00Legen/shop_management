@@ -1,5 +1,6 @@
 package controllers;
 
+import models.ChequeFull;
 import models.User;
 import models.Cheque;
 import controllers.interfaces.IUserController;
@@ -31,9 +32,7 @@ public class UserController implements IUserController {
         List<User> users = repo.getAllUsers();
 
         StringBuilder response = new StringBuilder();
-        for (User user : users) {
-            response.append(user.toString()).append("\n");
-        }
+        users.forEach(user -> response.append(user.toString()).append("\n"));
 
         return response.toString();
     }
@@ -58,14 +57,18 @@ public class UserController implements IUserController {
         List<Cheque> cheques = repo.getAllCheques();
 
         StringBuilder response = new StringBuilder();
-        for (Cheque cheque : cheques) {
-            response.append(cheque.toString()).append("\n");
-        }
+        cheques.forEach(cheque -> response.append(cheque.toString()).append("\n"));
 
         return response.toString();
     }
 
     public boolean deleteCheque(int id) {
         return repo.deleteCheque(id);
+    }
+
+    public String getLastCheque(int id) {
+        ChequeFull cheque = repo.getLastCheque(id);
+
+        return (cheque == null ? "User has no transactions!" : cheque.toString());
     }
 }

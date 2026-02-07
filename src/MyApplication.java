@@ -24,9 +24,10 @@ public class MyApplication {
         System.out.println("6. Get transaction by id");
         System.out.println("7. Create transaction");
         System.out.println("8. Delete transaction");
+        System.out.println("9. Get last transaction of the user by id");
         System.out.println("0. Exit");
         System.out.println();
-        System.out.print("Enter option (1-4): ");
+        System.out.print("Enter option (1-9): ");
     }
 
     public void start() {
@@ -44,6 +45,7 @@ public class MyApplication {
                     case 6: getChequeByIdMenu(); break;
                     case 7: createChequeMenu(); break;
                     case 8: deleteChequeMenu(); break;
+                    case 9: getLastChequeByIdMenu(); break;
                     default: return;
                 }
             } catch (InputMismatchException e) {
@@ -158,5 +160,13 @@ public class MyApplication {
                 break;
             }
         }
+    }
+
+    public void getLastChequeByIdMenu() {
+        System.out.println("Please enter id");
+        int id = scanner.nextInt();
+
+        String response = controller.getLastCheque(id);
+        System.out.println(response);
     }
 }

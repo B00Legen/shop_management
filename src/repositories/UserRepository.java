@@ -3,6 +3,7 @@ package repositories;
 import data.interfaces.IDB;
 import models.User;
 import models.Cheque;
+import models.ChequeFull;
 import repositories.interfaces.IUserRepository;
 
 import java.sql.*;
@@ -206,5 +207,31 @@ public class UserRepository implements IUserRepository {
             System.out.println("sql error: " + e.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public ChequeFull getLastCheque(int id) {
+        Connection con;
+
+        try {
+            con = db.getConnection();
+            String sql = "SELECT u.id AS user_id, u.name || ' ' || u.surname AS full_name, c.id AS transaction_id, c.price, c.date FROM users u LEFT JOIN (SELECT *, ROW_NUMBER() OVER (PARTITION BY uid ORDER BY date DESC) AS rn FROM cheques) c ON u.id = c.uid AND c.rn = 1 WHERE uid = ?";
+            PreparedStatement st = con.prepareStatement(sql);
+
+            st.setInt(1, id);
+
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new ChequeFull(rs.getInt("user_id"),
+                        rs.getString("full_name"),
+                        rs.getInt("transaction_id"),
+                        rs.getInt("price"),
+                        rs.getString("date"));
+            }
+        } catch (SQLException e) {
+            System.out.println("sql error: " + e.getMessage());
+        }
+
+        return null;
     }
 }
