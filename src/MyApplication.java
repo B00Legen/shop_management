@@ -25,7 +25,7 @@ public class MyApplication {
         System.out.println("7. Create transaction");
         System.out.println("8. Delete transaction");
         System.out.println("9. Get last transaction of the user by id");
-        System.out.println("0. Exit");
+        System.out.println("0. Exit"); //
         System.out.println();
         System.out.print("Enter option (1-9): ");
     }
