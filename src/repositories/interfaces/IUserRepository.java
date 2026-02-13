@@ -2,20 +2,25 @@ package repositories.interfaces;
 
 import models.User;
 import models.Cheque;
-import models.ChequeFull;
+import models.LastCheque;
 
 import java.util.List;
 
 public interface IUserRepository {
     boolean createUser(User user);
-    User getUser(int id);
-    List<User> getAllUsers();
+    List<User> readUser();
+    List<User> readUsersByStore(String store);
+    User readUser(int id);
+    boolean updateUser(User user);
+    boolean deleteUser();
     boolean deleteUser(int id);
 
     boolean createCheque(Cheque cheque);
-    Cheque getCheque(int id);
-    List<Cheque> getAllCheques();
+    List<Cheque> readCheque();
+    List<LastCheque> readLastCheque();
+    Cheque readCheque(int id);
+    LastCheque readLastCheque(int id);
+    boolean updateCheque(Cheque cheque);
+    boolean deleteCheque();
     boolean deleteCheque(int id);
-
-    ChequeFull getLastCheque(int id);
 }

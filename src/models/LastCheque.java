@@ -1,17 +1,17 @@
 package models;
 
-public class ChequeFull {
+public class LastCheque {
     private int uid;
     private String name;
     private int cid;
     private int price;
     private String date;
 
-    public ChequeFull() {
+    public LastCheque() {
 
     }
 
-    public ChequeFull(int uid, String name, int cid, int price, String date) {
+    public LastCheque(int uid, String name, int cid, int price, String date) {
         setUid(uid);
         setName(name);
         setCid(cid);

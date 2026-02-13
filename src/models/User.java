@@ -5,19 +5,21 @@ public class User {
     private String name;
     private String surname;
     private boolean gender;
+    private String store;
 
     public User() {
 
     }
 
-    public User(String name, String surname, boolean gender) {
+    public User(String name, String surname, boolean gender, String store) {
         setName(name);
         setSurname(surname);
         setGender(gender);
+        setStore(store);
     }
 
-    public User(int id, String name, String surname, boolean gender) {
-        this(name, surname, gender);
+    public User(int id, String name, String surname, boolean gender, String store) {
+        this(name, surname, gender, store);
         setId(id);
     }
 
@@ -53,13 +55,22 @@ public class User {
         this.gender = gender;
     }
 
+    public String getStore() {
+        return store;
+    }
+
+    public void setStore(String store) {
+        this.store = store;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", gender=" + (gender ? "Male" : "Female") +
+                ", gender=" + (gender ? "Male" : "Female") + '\'' +
+                ", store=" + store +
                 '}';
     }
 }
